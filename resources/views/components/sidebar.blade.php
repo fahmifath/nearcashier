@@ -9,7 +9,7 @@
         <!-- Navigation Menu -->
         <nav class="space-y-2">
             <!-- Dashboard -->
-            <a href="{{ route('admin.dashboard') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-all group {{ request()->routeIs('admin.dashboard') ? 'bg-gradient-to-r from-gray-500 to-gray-600 text-white' : '' }}">
+            <a href="{{ route('admin.dashboard.index') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-all group {{ request()->routeIs('admin.dashboard.index') ? 'bg-gradient-to-r from-gray-500 to-gray-600 text-white' : '' }}">
                 <i class="fas fa-chart-line text-lg group-hover:scale-110 transition-transform"></i>
                 <span class="font-medium">Dashboard</span>
                 <i class="fas fa-arrow-right text-xs ml-auto opacity-0 group-hover:opacity-100 transition-opacity"></i>
@@ -30,7 +30,7 @@
             </a>
 
             <!-- Kategori -->
-            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-all group">
+            <a href="{{ route('admin.categories.index') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-all group {{ request()->routeIs('admin.categories.index') ? 'bg-gradient-to-r from-gray-500 to-gray-600 text-white' : '' }}">
                 <i class="fas fa-tag text-lg group-hover:scale-110 transition-transform"></i>
                 <span class="font-medium">Kategori</span>
                 <i class="fas fa-arrow-right text-xs ml-auto opacity-0 group-hover:opacity-100 transition-opacity"></i>
