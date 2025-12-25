@@ -10,7 +10,7 @@
                 <div class="w-10 h-10 bg-gradient-to-br from-gray-400 to-gray-600 rounded-lg flex items-center justify-center">
                     <i class="fas fa-cash-register text-white text-lg"></i>
                 </div>
-                <span class="text-white font-bold text-xl hidden sm:inline">NearCashier</span>
+                <span class="text-white font-bold text-xl sm:inline">NearCashier</span>
             </div>
         </div>
 

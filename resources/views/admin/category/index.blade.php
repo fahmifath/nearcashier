@@ -13,6 +13,58 @@
         transform: translateY(-2px);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     }
+
+    /* Modal Animations */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        to {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+        }
+    }
+
+    .modal-backdrop {
+        animation: fadeIn 0.3s ease-out forwards;
+    }
+
+    .modal-backdrop.closing {
+        animation: fadeIn 0.3s ease-out reverse forwards;
+    }
+
+    .modal-content {
+        animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .modal-content.closing {
+        animation: slideDown 0.3s ease-out forwards;
+    }
+
+    .hidden {
+        display: none !important;
+    }
 @endsection
 
 @section('content')
@@ -120,8 +172,8 @@
 </div>
 
 <!-- Create/Edit Modal -->
-<div id="categoryModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40 flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-white rounded-xl card-shadow max-w-md w-full my-8">
+<div id="categoryModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40 flex items-center justify-center p-4 overflow-y-auto modal-backdrop">
+    <div class="bg-white rounded-xl card-shadow max-w-md w-full my-8 modal-content">
         <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center bg-gradient-to-r from-blue-50 to-blue-100">
             <h2 class="text-lg font-bold text-gray-800" id="modalTitle">
                 <i class="fas fa-plus-circle mr-2 text-blue-600"></i>Tambah Kategori
@@ -165,8 +217,8 @@
 </div>
 
 <!-- Delete Confirmation Modal -->
-<div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40 flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-white rounded-xl card-shadow max-w-md w-full my-8">
+<div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40 flex items-center justify-center p-4 overflow-y-auto modal-backdrop">
+    <div class="bg-white rounded-xl card-shadow max-w-md w-full my-8 modal-content">
         <div class="p-8 text-center">
             <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <i class="fas fa-exclamation-triangle text-red-600 text-3xl"></i>
@@ -214,7 +266,10 @@
         document.getElementById('formMethod').value = 'POST';
         document.getElementById('categoryName').value = '';
         categoryForm.action = '{{ route("admin.categories.store") }}';
+        
         categoryModal.classList.remove('hidden');
+        categoryModal.classList.add('modal-backdrop');
+        categoryModal.querySelector('.modal-content').classList.remove('closing');
         document.body.style.overflow = 'hidden';
     }
 
@@ -232,7 +287,10 @@
             })
             .then(data => {
                 document.getElementById('categoryName').value = data.name || '';
+                
                 categoryModal.classList.remove('hidden');
+                categoryModal.classList.add('modal-backdrop');
+                categoryModal.querySelector('.modal-content').classList.remove('closing');
                 document.body.style.overflow = 'hidden';
             })
             .catch(error => {
@@ -243,22 +301,41 @@
 
     // Close Modal
     function closeModal() {
-        categoryModal.classList.add('hidden');
-        document.body.style.overflow = 'auto';
+        const modalContent = categoryModal.querySelector('.modal-content');
+        categoryModal.classList.add('closing');
+        modalContent.classList.add('closing');
+        
+        setTimeout(() => {
+            categoryModal.classList.add('hidden');
+            categoryModal.classList.remove('modal-backdrop', 'closing');
+            modalContent.classList.remove('closing');
+            document.body.style.overflow = 'auto';
+        }, 300);
     }
 
     // Open Delete Modal
     function openDeleteModal(id, name) {
         document.getElementById('deleteCategoryName').textContent = name;
         deleteForm.action = `/admin/categories/${id}`;
+        
         deleteModal.classList.remove('hidden');
+        deleteModal.classList.add('modal-backdrop');
+        deleteModal.querySelector('.modal-content').classList.remove('closing');
         document.body.style.overflow = 'hidden';
     }
 
     // Close Delete Modal
     function closeDeleteModal() {
-        deleteModal.classList.add('hidden');
-        document.body.style.overflow = 'auto';
+        const modalContent = deleteModal.querySelector('.modal-content');
+        deleteModal.classList.add('closing');
+        modalContent.classList.add('closing');
+        
+        setTimeout(() => {
+            deleteModal.classList.add('hidden');
+            deleteModal.classList.remove('modal-backdrop', 'closing');
+            modalContent.classList.remove('closing');
+            document.body.style.overflow = 'auto';
+        }, 300);
     }
 
     // Close modal when clicking outside

@@ -23,7 +23,7 @@
             </a>
 
             <!-- Produk -->
-            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-all group">
+            <a href="{{ route('admin.products.index') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-all group {{ request()->routeIs('admin.products.index') ? 'bg-gradient-to-r from-gray-500 to-gray-600 text-white' : '' }}">
                 <i class="fas fa-box text-lg group-hover:scale-110 transition-transform"></i>
                 <span class="font-medium">Produk</span>
                 <i class="fas fa-arrow-right text-xs ml-auto opacity-0 group-hover:opacity-100 transition-opacity"></i>
@@ -83,13 +83,13 @@
         </nav>
     </div>
 
-    <!-- Footer Info -->
+    <!-- Footer Info
     <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-600 bg-gray-800" style="background-color: #2d3a48;">
         <div class="flex items-center space-x-2 text-xs text-gray-400">
             <i class="fas fa-info-circle"></i>
             <span>Version 1.0.0</span>
         </div>
-    </div>
+    </div> -->
 </div>
 
 <!-- Sidebar Overlay (Mobile) -->
