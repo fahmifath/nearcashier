@@ -44,7 +44,7 @@
             </a>
 
             <!-- Diskon -->
-            <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-all group">
+            <a href="{{ route('admin.discounts.index') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition-all group {{ request()->routeIs('admin.discounts.index') ? 'bg-gradient-to-r from-gray-500 to-gray-600 text-white' : '' }}">
                 <i class="fas fa-percent text-lg group-hover:scale-110 transition-transform"></i>
                 <span class="font-medium">Diskon</span>
                 <i class="fas fa-arrow-right text-xs ml-auto opacity-0 group-hover:opacity-100 transition-opacity"></i>

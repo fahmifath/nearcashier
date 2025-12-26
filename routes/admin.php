@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\DiscountController;
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
@@ -21,4 +22,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
     Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
     Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+
+    // Discount Routes
+    Route::get('/discounts', [DiscountController::class, 'index'])->name('discounts.index');
+    Route::post('/discounts', [DiscountController::class, 'store'])->name('discounts.store');
+    Route::get('/discounts/{discount}', [DiscountController::class, 'show'])->name('discounts.show');
+    Route::put('/discounts/{discount}', [DiscountController::class, 'update'])->name('discounts.update');
+    Route::delete('/discounts/{discount}', [DiscountController::class, 'destroy'])->name('discounts.destroy');
 });
